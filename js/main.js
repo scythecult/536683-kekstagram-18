@@ -30,12 +30,12 @@ var AUTHOR_DESCRIPTIONS = [
   'Привет с Колымы',
   'Удачный отпуск на лесоповале'
 ];
-var getRandomElement = function(min, max) {
+  var getRandomElement = function(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
 // comments
-var generateComments = function(commentsNumber) {
+  var generateComments = function(commentsNumber) {
   var comments = [];
 
   for (var i = 0; i < commentsNumber; i++) {
@@ -49,7 +49,7 @@ var generateComments = function(commentsNumber) {
 };
 
 // description
-var generatePhotoDescription = function() {
+  var generatePhotoDescription = function() {
   var photos = [];
   for (var i = 0; i < PHOTO_NUMBER; i++) {
     photos.push({
@@ -65,7 +65,7 @@ var generatePhotoDescription = function() {
 };
 
 // bigpicture
-var showBigPicture = function(photo) {
+  var showBigPicture = function(photo) {
   var bigPictureElement = document.querySelector('.big-picture');
   var commentsList = document.querySelector('.social__comments');
   var commentElement = commentsList.querySelector('.social__comment');
@@ -108,7 +108,7 @@ var showBigPicture = function(photo) {
     .classList.add('visually-hidden');
 };
 
-var renderPhoto = function() {
+  var renderPhoto = function() {
   var pictureBlock = document.querySelector('.pictures');
   var pictureTemplate = document
     .querySelector('#picture')
