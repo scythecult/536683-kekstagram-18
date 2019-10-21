@@ -26,12 +26,13 @@ var generateComments = function (commentsNumber) {
 };
 
 // description
-var generatePhotoDescription = function () {
+var generatePhotoDescription = function() {
   var photos = [];
   for (var i = 0; i < PHOTO_NUMBER; i++) {
     photos.push({
       url: 'photos/' + (i + 1) + '.jpg',
-      description:  AUTHOR_DESCRIPTIONS[getRandomElement(0, AUTHOR_DESCRIPTIONS.length)],
+      description:
+        AUTHOR_DESCRIPTIONS[getRandomElement(0, AUTHOR_DESCRIPTIONS.length)],
       likes: getRandomElement(15, 200),
       comments: generateComments(getRandomElement(0, MAX_COMMENTS))
     });
