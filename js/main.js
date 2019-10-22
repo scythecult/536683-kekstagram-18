@@ -1,9 +1,5 @@
 'use strict';
 
-var PHOTO_NUMBER = 25;
-var AVATAR_NUMBER = 6;
-var MAX_COMMENTS = 100;
-var VISIBLE_COMMENTS = 3;
 var COMMENTS_MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
@@ -312,7 +308,6 @@ var renderBigPhoto = function (photos) {
 
 bigPhoto.querySelector('.social__comment-count').classList.add('visually-hidden');
 bigPhoto.querySelector('.comments-loader').classList.add('visually-hidden');
-
 
 // обработчик события нажатия на клавишу ESC
 var onModalEscPress = function (evt) {
