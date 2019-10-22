@@ -46,7 +46,9 @@ var HEAT_COEFFICIENT = 0.02;
 var HASHTAGS_MAX_COUNT = 5;
 var HASHTAG_MAX_LENGTH = 20;
 
-var photoSample = document.querySelector('#picture').content.querySelector('.picture');
+var photoSample = document
+  .querySelector('#picture')
+  .content.querySelector('.picture');
 var photosList = document.querySelector('.pictures');
 
 var bigPhoto = document.querySelector('.big-picture');
@@ -60,8 +62,12 @@ var buttonCloseUploadField = uploadField.querySelector('.img-upload__cancel');
 var userUploadImg = uploadField.querySelector('.img-upload__preview img');
 
 var scaleIndicator = uploadField.querySelector('.scale__control--value');
-var buttonDecreaseImgScale = uploadField.querySelector('.scale__control--smaller');
-var buttonIncreaseImgScale = uploadField.querySelector('.scale__control--bigger');
+var buttonDecreaseImgScale = uploadField.querySelector(
+  '.scale__control--smaller'
+);
+var buttonIncreaseImgScale = uploadField.querySelector(
+  '.scale__control--bigger'
+);
 
 var effectSlider = uploadField.querySelector('.effect-level');
 var pin = uploadField.querySelector('.effect-level__pin');
@@ -103,11 +109,9 @@ var detectDuplicateHashtag = function (tag, index, hashes) {
 
 // проверяет на валидность хэш-теги
 var validateHashtags = function (evt) {
-  var hashes = evt.target.value
-    .split(' ')
-    .filter(function (tag) {
-      return tag;
-    });
+  var hashes = evt.target.value.split(' ').filter(function (tag) {
+    return tag;
+  });
 
   var errorMessage = '';
 
@@ -121,7 +125,8 @@ var validateHashtags = function (evt) {
     } else if (hashes.length > HASHTAGS_MAX_COUNT) {
       errorMessage = 'Нельзя указать больше пяти хэш-тегов';
     } else if (tag.length > HASHTAG_MAX_LENGTH) {
-      errorMessage = 'Максимальная длина одного хэш-тега 20 символов, включая символ "#"';
+      errorMessage =
+        'Максимальная длина одного хэш-тега 20 символов, включая символ "#"';
     }
   });
 
@@ -155,32 +160,40 @@ var changeEffectsButton = function () {
 
 // меняет эффект на фото в зависимости от положения пина
 var changeEffectsPin = function () {
-  var effectValue = Math.round((pin.offsetLeft * 100) / effectScale.offsetWidth);
+  var effectValue = Math.round(
+    (pin.offsetLeft * 100) / effectScale.offsetWidth
+  );
 
   effectValueInput.value = effectValue;
 
   switch (effects.querySelector('input:checked').value) {
     case 'chrome':
-      userUploadImg.style.filter = 'grayscale(' + (effectValueInput.value * CHROME_COEFFICIENT) + ')';
+      userUploadImg.style.filter =
+        'grayscale(' + effectValueInput.value * CHROME_COEFFICIENT + ')';
       break;
     case 'sepia':
-      userUploadImg.style.filter = 'sepia(' + (effectValueInput.value * SEPIA_COEFFICIENT) + ')';
+      userUploadImg.style.filter =
+        'sepia(' + effectValueInput.value * SEPIA_COEFFICIENT + ')';
       break;
     case 'marvin':
       userUploadImg.style.filter = 'invert(' + effectValueInput.value + '%)';
       break;
     case 'phobos':
-      userUploadImg.style.filter = 'blur(' + (effectValueInput.value * PHOBOS_COEFFICIENT) + 'px)';
+      userUploadImg.style.filter =
+        'blur(' + effectValueInput.value * PHOBOS_COEFFICIENT + 'px)';
       break;
     case 'heat':
-      userUploadImg.style.filter = 'brightness(' + (effectValueInput.value * HEAT_COEFFICIENT + 1) + ')';
+      userUploadImg.style.filter =
+        'brightness(' + (effectValueInput.value * HEAT_COEFFICIENT + 1) + ')';
       break;
   }
 };
 
 // увеличивает изображение
 var increaseImg = function () {
-  var valueScaleIndicator = Number(scaleIndicator.value.slice(0, scaleIndicator.value.length - 1));
+  var valueScaleIndicator = Number(
+    scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
+  );
 
   if (valueScaleIndicator < MAX_EFFECT_VALUE) {
     valueScaleIndicator += SCALE_STEP;
@@ -192,7 +205,9 @@ var increaseImg = function () {
 
 // уменьшает изображение
 var decreaseImg = function () {
-  var valueScaleIndicator = Number(scaleIndicator.value.slice(0, scaleIndicator.value.length - 1));
+  var valueScaleIndicator = Number(
+    scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
+  );
 
   if (valueScaleIndicator > SCALE_STEP) {
     valueScaleIndicator -= SCALE_STEP;
@@ -206,9 +221,16 @@ var decreaseImg = function () {
 var generateComment = function () {
   var comment = {};
 
-  comment.avatar = 'img/avatar-' + generateRandomNumber(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER) + '.svg';
-  comment.message = COMMENTS_MESSAGES[generateRandomNumber(0, COMMENTS_MESSAGES.length - 1)];
-  comment.autor = COMMENT_AUTORS_NAMES[generateRandomNumber(0, COMMENT_AUTORS_NAMES.length - 1)];
+  comment.avatar =
+    'img/avatar-' +
+    generateRandomNumber(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER) +
+    '.svg';
+  comment.message =
+    COMMENTS_MESSAGES[generateRandomNumber(0, COMMENTS_MESSAGES.length - 1)];
+  comment.autor =
+    COMMENT_AUTORS_NAMES[
+      generateRandomNumber(0, COMMENT_AUTORS_NAMES.length - 1)
+    ];
 
   return comment;
 };
@@ -225,13 +247,13 @@ var generateComments = function () {
   return comments;
 };
 
-
 // генерирует объект-фотографию
 var generatePhoto = function (photoNumber) {
   var photo = {};
 
   photo.url = 'photos/' + photoNumber + '.jpg';
-  photo.description = PHOTO_DESCRIPTIONS[generateRandomNumber(0, PHOTO_DESCRIPTIONS.length - 1)];
+  photo.description =
+    PHOTO_DESCRIPTIONS[generateRandomNumber(0, PHOTO_DESCRIPTIONS.length - 1)];
   photo.likes = generateRandomNumber(MIN_LIKES_COUNT, MAX_LIKES_COUNT);
   photo.comments = generateComments();
 
@@ -255,7 +277,8 @@ var renderPhoto = function (photo) {
 
   photoElement.querySelector('img').src = photo.url;
   photoElement.querySelector('.picture__likes').textContent = photo.likes;
-  photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+  photoElement.querySelector('.picture__comments').textContent =
+    photo.comments.length;
 
   return photoElement;
 };
@@ -273,10 +296,10 @@ var renderPhotosList = function (photos) {
 
 renderPhotosList(generatePhotos(PHOTOS_COUNT));
 
-
 // генерирует шаблон комментария
 var generateCommentSample = function (container) {
-  container.insertAdjacentHTML('afterbegin',
+  container.insertAdjacentHTML(
+    'afterbegin',
     '<li class="social__comment">' +
     '<img class="social__picture" width="35" height="35">' +
     '<p class="social__text"></p>' +
@@ -288,10 +311,13 @@ var generateCommentSample = function (container) {
 var renderBigPhoto = function (photos) {
   bigPhoto.classList.remove('hidden');
 
-  bigPhoto.querySelector('.big-picture__img').querySelector('img').src = photos[0].url;
+  bigPhoto.querySelector('.big-picture__img').querySelector('img').src =
+    photos[0].url;
   bigPhoto.querySelector('.likes-count').textContent = photos[0].likes;
-  bigPhoto.querySelector('.comments-count').textContent = photos[0].comments.length;
-  bigPhoto.querySelector('.social__caption').textContent = photos[0].description;
+  bigPhoto.querySelector('.comments-count').textContent =
+    photos[0].comments.length;
+  bigPhoto.querySelector('.social__caption').textContent =
+    photos[0].description;
 
   commentsPlugs.forEach(function (commentPlug) {
     commentsContainer.removeChild(commentPlug);
@@ -300,13 +326,20 @@ var renderBigPhoto = function (photos) {
   for (var i = 0; i < photos[0].comments.length; i++) {
     generateCommentSample(commentsContainer);
 
-    commentsContainer.querySelector('.social__comment').querySelector('img').src = photos[0].comments[i].avatar;
-    commentsContainer.querySelector('.social__comment').querySelector('img').alt = photos[0].comments[i].autor;
-    commentsContainer.querySelector('.social__text').textContent = photos[0].comments[i].message;
+    commentsContainer
+      .querySelector('.social__comment')
+      .querySelector('img').src = photos[0].comments[i].avatar;
+    commentsContainer
+      .querySelector('.social__comment')
+      .querySelector('img').alt = photos[0].comments[i].autor;
+    commentsContainer.querySelector('.social__text').textContent =
+      photos[0].comments[i].message;
   }
 };
 
-bigPhoto.querySelector('.social__comment-count').classList.add('visually-hidden');
+bigPhoto
+  .querySelector('.social__comment-count')
+  .classList.add('visually-hidden');
 bigPhoto.querySelector('.comments-loader').classList.add('visually-hidden');
 
 // обработчик события нажатия на клавишу ESC
@@ -372,7 +405,6 @@ var onButtonCloseUploadFieldPress = function () {
 
   resetUserImgSettings();
 };
-
 
 // открытие окна редактирования фото при изменении значения инпута загрузки
 imgUploadInput.addEventListener('change', onInputUploadChange);
