@@ -242,10 +242,10 @@ var generateComments = function () {
 // генерирует шаблон комментария
 var generateCommentSample = function (container) {
   container.insertAdjacentHTML('afterbegin',
-    '<li class="social__comment">' +
-    '<img class="social__picture" width="35" height="35">' +
-    '<p class="social__text"></p>' +
-    '</li>'
+      '<li class="social__comment">' +
+      '<img class="social__picture" width="35" height="35">' +
+      '<p class="social__text"></p>' +
+      '</li>'
   );
 };
 
