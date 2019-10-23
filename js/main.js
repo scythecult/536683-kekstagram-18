@@ -78,14 +78,14 @@ var effects = uploadField.querySelector('.effects');
 var hashtagsInput = uploadField.querySelector('.text__hashtags');
 
 // случайное число
-var generateRandomNumber = function (min, max) {
+var generateRandomNumber = function(min, max) {
   var randomNumber = Math.floor(min + Math.random() * (max + 1 - min));
 
   return randomNumber;
 };
 
 // сброс всех настроек изображения
-var resetUserImgSettings = function () {
+var resetUserImgSettings = function() {
   effectSlider.classList.add('hidden');
   userUploadImg.removeAttribute('class');
   userUploadImg.removeAttribute('style');
@@ -95,27 +95,27 @@ var resetUserImgSettings = function () {
 };
 
 // определяет наличие повторяющихся хэш-тегов
-var detectDuplicateHashtag = function (tag, index, hashes) {
+var detectDuplicateHashtag = function(tag, index, hashes) {
   var tags = hashes.slice(0);
 
   tags.splice(index, 1);
 
   return tags
-    .map(function (hashtag) {
+    .map(function(hashtag) {
       return hashtag.toLowerCase();
     })
     .includes(tag.toLowerCase());
 };
 
 // проверяет на валидность хэш-теги
-var validateHashtags = function (evt) {
-  var hashes = evt.target.value.split(' ').filter(function (tag) {
+var validateHashtags = function(evt) {
+  var hashes = evt.target.value.split(' ').filter(function(tag) {
     return tag;
   });
 
   var errorMessage = '';
 
-  hashes.forEach(function (tag, index) {
+  hashes.forEach(function(tag, index) {
     if (tag[0] !== '#') {
       errorMessage = 'Хэш-тег должен начинаться с символа "#"';
     } else if (tag === '#') {
@@ -134,7 +134,7 @@ var validateHashtags = function (evt) {
 };
 
 // меняет эффект на фото при нажатии
-var changeEffectsButton = function () {
+var changeEffectsButton = function() {
   if (effects.querySelector('input:checked').value !== 'none') {
     effectSlider.classList.remove('hidden');
   }
@@ -159,7 +159,7 @@ var changeEffectsButton = function () {
 };
 
 // меняет эффект на фото в зависимости от положения пина
-var changeEffectsPin = function () {
+var changeEffectsPin = function() {
   var effectValue = Math.round(
     (pin.offsetLeft * 100) / effectScale.offsetWidth
   );
@@ -190,7 +190,7 @@ var changeEffectsPin = function () {
 };
 
 // увеличивает изображение
-var increaseImg = function () {
+var increaseImg = function() {
   var valueScaleIndicator = Number(
     scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
   );
@@ -204,7 +204,7 @@ var increaseImg = function () {
 };
 
 // уменьшает изображение
-var decreaseImg = function () {
+var decreaseImg = function() {
   var valueScaleIndicator = Number(
     scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
   );
@@ -218,7 +218,7 @@ var decreaseImg = function () {
 };
 
 // генерирует объект-комментарий
-var generateComment = function () {
+var generateComment = function() {
   var comment = {};
 
   comment.avatar =
@@ -236,7 +236,7 @@ var generateComment = function () {
 };
 
 // генерирует массив объектов-комментариев
-var generateComments = function () {
+var generateComments = function() {
   var comments = [];
   comments.length = generateRandomNumber(0, MAX_COMMENTS_COUNT);
 
@@ -248,7 +248,7 @@ var generateComments = function () {
 };
 
 // генерирует объект-фотографию
-var generatePhoto = function (photoNumber) {
+var generatePhoto = function(photoNumber) {
   var photo = {};
 
   photo.url = 'photos/' + photoNumber + '.jpg';
@@ -261,7 +261,7 @@ var generatePhoto = function (photoNumber) {
 };
 
 // генерирует массив объектов-фотографий
-var generatePhotos = function (photosCount) {
+var generatePhotos = function(photosCount) {
   var photos = [];
 
   for (var i = 0; i < photosCount; i++) {
@@ -272,7 +272,7 @@ var generatePhotos = function (photosCount) {
 };
 
 // отрисовывает фотографию по шаблону
-var renderPhoto = function (photo) {
+var renderPhoto = function(photo) {
   var photoElement = photoSample.cloneNode(true);
 
   photoElement.querySelector('img').src = photo.url;
@@ -284,10 +284,10 @@ var renderPhoto = function (photo) {
 };
 
 // отрисовывает фотографии в блок .picture
-var renderPhotosList = function (photos) {
+var renderPhotosList = function(photos) {
   var fragment = document.createDocumentFragment();
 
-  photos.forEach(function (photo) {
+  photos.forEach(function(photo) {
     fragment.appendChild(renderPhoto(photo));
   });
 
@@ -297,18 +297,18 @@ var renderPhotosList = function (photos) {
 renderPhotosList(generatePhotos(PHOTOS_COUNT));
 
 // генерирует шаблон комментария
-var generateCommentSample = function (container) {
+var generateCommentSample = function(container) {
   container.insertAdjacentHTML(
     'afterbegin',
     '<li class="social__comment">' +
-    '<img class="social__picture" width="35" height="35">' +
-    '<p class="social__text"></p>' +
-    '</li>'
+      '<img class="social__picture" width="35" height="35">' +
+      '<p class="social__text"></p>' +
+      '</li>'
   );
 };
 
 // отрисовывает блок с большой фотографией
-var renderBigPhoto = function (photos) {
+var renderBigPhoto = function(photos) {
   bigPhoto.classList.remove('hidden');
 
   bigPhoto.querySelector('.big-picture__img').querySelector('img').src =
@@ -319,7 +319,7 @@ var renderBigPhoto = function (photos) {
   bigPhoto.querySelector('.social__caption').textContent =
     photos[0].description;
 
-  commentsPlugs.forEach(function (commentPlug) {
+  commentsPlugs.forEach(function(commentPlug) {
     commentsContainer.removeChild(commentPlug);
   });
 
@@ -343,52 +343,52 @@ bigPhoto
 bigPhoto.querySelector('.comments-loader').classList.add('visually-hidden');
 
 // обработчик события нажатия на клавишу ESC
-var onModalEscPress = function (evt) {
+var onModalEscPress = function(evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     onButtonCloseUploadFieldPress();
   }
 };
 
 // обработчик события клика на кнопку уменьшения изображения
-var onButtonDecreaseImgClick = function () {
+var onButtonDecreaseImgClick = function() {
   decreaseImg();
 };
 
 // обработчик события клика на кнопку увеличения изображения
-var onButtonIncreaseImgClick = function () {
+var onButtonIncreaseImgClick = function() {
   increaseImg();
 };
 
 // вычисление уровня насыщенности эффекта
-var onPinMouseUp = function () {
+var onPinMouseUp = function() {
   changeEffectsPin();
 };
 
 // смена эффекта по клику
-var onEffectsItemClick = function () {
+var onEffectsItemClick = function() {
   resetUserImgSettings();
 
   changeEffectsButton();
 };
 
 // обрабатывает изменения значения инпута для хэш-тегов
-var onHashtagsInputChange = function (evt) {
+var onHashtagsInputChange = function(evt) {
   validateHashtags(evt);
 };
 
 // обработчик события focus на поле ввода хэш-тега
-var onInputHashtagFocus = function () {
+var onInputHashtagFocus = function() {
   document.removeEventListener('keydown', onModalEscPress);
 };
 
 // открывает окно редактирования
-var onInputUploadChange = function () {
+var onInputUploadChange = function() {
   uploadField.querySelector('.img-upload__overlay').classList.remove('hidden');
 
   document.addEventListener('keydown', onModalEscPress);
 
   hashtagsInput.addEventListener('focus', onInputHashtagFocus);
-  hashtagsInput.addEventListener('blur', function () {
+  hashtagsInput.addEventListener('blur', function() {
     document.addEventListener('keydown', onModalEscPress);
   });
 
@@ -396,7 +396,7 @@ var onInputUploadChange = function () {
 };
 
 // закрывает окно редактирования
-var onButtonCloseUploadFieldPress = function () {
+var onButtonCloseUploadFieldPress = function() {
   uploadField.querySelector('.img-upload__overlay').classList.add('hidden');
 
   document.removeEventListener('keydown', onModalEscPress);
@@ -428,12 +428,12 @@ effects.addEventListener('click', onEffectsItemClick);
 hashtagsInput.addEventListener('change', onHashtagsInputChange);
 
 // закрывает большую фотку
-var closeBigPhoto = function () {
+var closeBigPhoto = function() {
   bigPhoto.classList.add('hidden');
 };
 
 // показывает полноразмерное фото при клике на миниатюру
-photosList.addEventListener('click', function (evt) {
+photosList.addEventListener('click', function(evt) {
   if (evt.target.classList.contains('picture__img')) {
     renderBigPhoto(generatePhotos(PHOTOS_COUNT));
   }
