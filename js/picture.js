@@ -47,7 +47,7 @@
 
   // закрывает полноразмерное фото при нажатии на кнопку закрытия с клавиатуры
   buttonCloseBigPhoto.addEventListener(
-    'keydown',
-    onButtonCloseBigPhotoEnterPress
+      'keydown',
+      onButtonCloseBigPhotoEnterPress
   );
 })();

@@ -12,12 +12,12 @@
     var comment = {};
 
     var messageIndex = window.utils.generateRandomNumber(
-      0,
-      window.data.commentsMessage.length - 1
+        0,
+        window.data.commentsMessage.length - 1
     );
     var autorIndex = window.utils.generateRandomNumber(
-      0,
-      window.data.commentAutorName.length - 1
+        0,
+        window.data.commentAutorName.length - 1
     );
 
     comment.avatar =
@@ -45,11 +45,11 @@
   // генерирует шаблон комментария
   var generateCommentSample = function (container) {
     container.insertAdjacentHTML(
-      'afterbegin',
-      '<li class="social__comment">' +
-      '<img class="social__picture" width="35" height="35">' +
-      '<p class="social__text"></p>' +
-      '</li>'
+        'afterbegin',
+        '<li class="social__comment">' +
+        '<img class="social__picture" width="35" height="35">' +
+        '<p class="social__text"></p>' +
+        '</li>'
     );
   };
 

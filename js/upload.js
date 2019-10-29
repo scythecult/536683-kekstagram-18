@@ -89,14 +89,14 @@
 
   // закрытие окна редактирования фото при клике на кнопку закрытия
   buttonCloseUploadField.addEventListener(
-    'click',
-    onButtonCloseUploadFieldClick
+      'click',
+      onButtonCloseUploadFieldClick
   );
 
   // закрытие окна редактирования фото при нажатии на кнопку закрытия с клавиатуры
   buttonCloseUploadField.addEventListener(
-    'keydown',
-    onButtonCloseUploadFieldEnterPress
+      'keydown',
+      onButtonCloseUploadFieldEnterPress
   );
 
   window.upload = {

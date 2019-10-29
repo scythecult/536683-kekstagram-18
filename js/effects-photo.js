@@ -44,7 +44,7 @@
   // меняет эффект на фото в зависимости от положения пина
   var changeEffectsPin = function () {
     var effectValue = Math.round(
-      (pin.offsetLeft * MAX_EFFECT_VALUE) / effectScale.offsetWidth
+        (pin.offsetLeft * MAX_EFFECT_VALUE) / effectScale.offsetWidth
     );
 
     effectValueInput.value = effectValue;

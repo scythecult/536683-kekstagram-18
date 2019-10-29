@@ -15,15 +15,15 @@
     var photo = {};
 
     var descriptionIndex = window.utils.generateRandomNumber(
-      0,
-      window.data.photoDescription.length - 1
+        0,
+        window.data.photoDescription.length - 1
     );
 
     photo.url = 'photos/' + photoNumber + '.jpg';
     photo.description = window.data.photoDescription[descriptionIndex];
     photo.likes = window.utils.generateRandomNumber(
-      MIN_LIKES_COUNT,
-      MAX_LIKES_COUNT
+        MIN_LIKES_COUNT,
+        MAX_LIKES_COUNT
     );
     photo.comments = window.comments.generateComments();
 

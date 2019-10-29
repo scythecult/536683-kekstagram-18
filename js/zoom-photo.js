@@ -8,16 +8,16 @@
   var userUploadImg = uploadField.querySelector('.img-upload__preview img');
   var scaleIndicator = uploadField.querySelector('.scale__control--value');
   var buttonDecreaseImgScale = uploadField.querySelector(
-    '.scale__control--smaller'
+      '.scale__control--smaller'
   );
   var buttonIncreaseImgScale = uploadField.querySelector(
-    '.scale__control--bigger'
+      '.scale__control--bigger'
   );
 
   // увеличивает изображение
   var increaseImg = function () {
     var valueScaleIndicator = Number(
-      scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
+        scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
     );
 
     if (valueScaleIndicator < MAX_EFFECT_VALUE) {
@@ -32,7 +32,7 @@
   // уменьшает изображение
   var decreaseImg = function () {
     var valueScaleIndicator = Number(
-      scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
+        scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
     );
 
     if (valueScaleIndicator > SCALE_STEP) {
