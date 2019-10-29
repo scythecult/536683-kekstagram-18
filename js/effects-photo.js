@@ -1,20 +1,16 @@
 'use strict';
 
 (function () {
+
   var CHROME_COEFFICIENT = 0.01;
   var SEPIA_COEFFICIENT = 0.01;
   var PHOBOS_COEFFICIENT = 0.03;
   var HEAT_COEFFICIENT = 0.02;
 
-  var MAX_EFFECT_VALUE = 100;
-
-  var uploadField = document.querySelector('.img-upload');
-  var userUploadImg = uploadField.querySelector('.img-upload__preview img');
-  var effectSlider = uploadField.querySelector('.effect-level');
-  var pin = uploadField.querySelector('.effect-level__pin');
-  var effectScale = uploadField.querySelector('.effect-level__line');
-  var effectValueInput = uploadField.querySelector('.effect-level__value');
-  var effects = uploadField.querySelector('.effects');
+  var userUploadImg = window.utils.uploadField.querySelector('.img-upload__preview img');
+  var effectSlider = window.utils.uploadField.querySelector('.effect-level');
+  var effectValueInput = window.utils.uploadField.querySelector('.effect-level__value');
+  var effects = window.utils.uploadField.querySelector('.effects');
 
   // меняет эффект на фото при нажатии на кнопку эффекта
   var changeEffectsButton = function () {
@@ -43,50 +39,50 @@
 
   // меняет эффект на фото в зависимости от положения пина
   var changeEffectsPin = function () {
-    var effectValue = Math.round(
-        (pin.offsetLeft * MAX_EFFECT_VALUE) / effectScale.offsetWidth
-    );
-
-    effectValueInput.value = effectValue;
 
     switch (effects.querySelector('input:checked').value) {
       case 'chrome':
-        userUploadImg.style.filter =
-          'grayscale(' + effectValueInput.value * CHROME_COEFFICIENT + ')';
+        userUploadImg.style.filter = 'grayscale(' + (effectValueInput.value * CHROME_COEFFICIENT) + ')';
         break;
       case 'sepia':
-        userUploadImg.style.filter =
-          'sepia(' + effectValueInput.value * SEPIA_COEFFICIENT + ')';
+        userUploadImg.style.filter = 'sepia(' + (effectValueInput.value * SEPIA_COEFFICIENT) + ')';
         break;
       case 'marvin':
         userUploadImg.style.filter = 'invert(' + effectValueInput.value + '%)';
         break;
       case 'phobos':
-        userUploadImg.style.filter =
-          'blur(' + effectValueInput.value * PHOBOS_COEFFICIENT + 'px)';
+        userUploadImg.style.filter = 'blur(' + (effectValueInput.value * PHOBOS_COEFFICIENT) + 'px)';
         break;
       case 'heat':
-        userUploadImg.style.filter =
-          'brightness(' + (effectValueInput.value * HEAT_COEFFICIENT + 1) + ')';
+        userUploadImg.style.filter = 'brightness(' + (effectValueInput.value * HEAT_COEFFICIENT + 1) + ')';
         break;
     }
   };
 
   // вычисление уровня насыщенности эффекта
-  var onPinMouseUp = function () {
+  var onPinMouseMove = function () {
     changeEffectsPin();
+  };
+
+  var onPinMouseUp = function () {
+    document.removeEventListener('mousemove', onPinMouseMove);
+    document.removeEventListener('mouseup', onPinMouseUp);
   };
 
   // смена эффекта по клику
   var onEffectsItemClick = function () {
-    window.upload.resetUserImgSettings();
+    window.utils.resetUserImgSettings();
 
     changeEffectsButton();
   };
 
-  // изменение уровня насыщенности эффекта при отжатии ЛКМ
-  pin.addEventListener('mouseup', onPinMouseUp);
+  // изменение уровня насыщенности эффекта при
+  document.addEventListener('mousemove', onPinMouseMove);
+
+  //
+  document.addEventListener('mousemup', onPinMouseUp);
 
   // изменение эффекта фото при клике
   effects.addEventListener('click', onEffectsItemClick);
+
 })();

@@ -1,47 +1,36 @@
 'use strict';
 
 (function () {
-  var SCALE_STEP = 25;
-  var MAX_EFFECT_VALUE = 100;
 
-  var uploadField = document.querySelector('.img-upload');
-  var userUploadImg = uploadField.querySelector('.img-upload__preview img');
-  var scaleIndicator = uploadField.querySelector('.scale__control--value');
-  var buttonDecreaseImgScale = uploadField.querySelector(
-      '.scale__control--smaller'
-  );
-  var buttonIncreaseImgScale = uploadField.querySelector(
-      '.scale__control--bigger'
-  );
+  var SCALE_STEP = 25;
+
+  var userUploadImg = window.utils.uploadField.querySelector('.img-upload__preview img');
+  var scaleIndicator = window.utils.uploadField.querySelector('.scale__control--value');
+  var buttonDecreaseImgScale = window.utils.uploadField.querySelector('.scale__control--smaller');
+  var buttonIncreaseImgScale = window.utils.uploadField.querySelector('.scale__control--bigger');
 
   // увеличивает изображение
   var increaseImg = function () {
-    var valueScaleIndicator = Number(
-        scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
-    );
+    var valueScaleIndicator = Number(scaleIndicator.value.slice(0, scaleIndicator.value.length - 1));
 
-    if (valueScaleIndicator < MAX_EFFECT_VALUE) {
+    if (valueScaleIndicator < window.utils.maxEffectValue) {
       valueScaleIndicator += SCALE_STEP;
     }
 
     scaleIndicator.value = valueScaleIndicator + '%';
-    userUploadImg.style.transform =
-      'scale(' + valueScaleIndicator / MAX_EFFECT_VALUE + ')';
+    userUploadImg.style.transform = 'scale(' + valueScaleIndicator / window.utils.maxEffectValue + ')';
   };
 
   // уменьшает изображение
   var decreaseImg = function () {
-    var valueScaleIndicator = Number(
-        scaleIndicator.value.slice(0, scaleIndicator.value.length - 1)
-    );
+    var valueScaleIndicator = Number(scaleIndicator.value.slice(0, scaleIndicator.value.length - 1));
 
     if (valueScaleIndicator > SCALE_STEP) {
       valueScaleIndicator -= SCALE_STEP;
     }
 
     scaleIndicator.value = valueScaleIndicator + '%';
-    userUploadImg.style.transform =
-      'scale(' + valueScaleIndicator / MAX_EFFECT_VALUE + ')';
+    userUploadImg.style.transform = 'scale(' + valueScaleIndicator / window.utils.maxEffectValue + ')';
   };
 
   // обработчик события клика на кнопку уменьшения изображения
@@ -59,4 +48,5 @@
 
   // увеличение изображения при клике на кнопку "+"
   buttonIncreaseImgScale.addEventListener('click', onButtonIncreaseImgClick);
+
 })();
