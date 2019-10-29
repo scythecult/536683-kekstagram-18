@@ -1,22 +1,20 @@
 'use strict';
 
 (function () {
+
   var bigPhoto = document.querySelector('.big-picture');
   var buttonCloseBigPhoto = bigPhoto.querySelector('.big-picture__cancel');
 
   // отрисовывает блок с большой фотографией
   window.renderBigPhoto = function (photo) {
+
     bigPhoto.classList.remove('hidden');
-    bigPhoto
-      .querySelector('.social__comment-count')
-      .classList.add('visually-hidden');
+    bigPhoto.querySelector('.social__comment-count').classList.add('visually-hidden');
     bigPhoto.querySelector('.comments-loader').classList.add('visually-hidden');
 
-    bigPhoto.querySelector('.big-picture__img').querySelector('img').src =
-      photo.url;
+    bigPhoto.querySelector('.big-picture__img').querySelector('img').src = photo.url;
     bigPhoto.querySelector('.likes-count').textContent = photo.likes;
-    bigPhoto.querySelector('.comments-count').textContent =
-      photo.comments.length;
+    bigPhoto.querySelector('.comments-count').textContent = photo.comments.length;
     bigPhoto.querySelector('.social__caption').textContent = photo.description;
 
     window.comments.removeComments();
@@ -46,8 +44,6 @@
   buttonCloseBigPhoto.addEventListener('click', closeBigPhoto);
 
   // закрывает полноразмерное фото при нажатии на кнопку закрытия с клавиатуры
-  buttonCloseBigPhoto.addEventListener(
-      'keydown',
-      onButtonCloseBigPhotoEnterPress
-  );
+  buttonCloseBigPhoto.addEventListener('keydown', onButtonCloseBigPhotoEnterPress);
+
 })();

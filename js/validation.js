@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
+
   var HASHTAGS_MAX_COUNT = 5;
   var HASHTAG_MAX_LENGTH = 20;
 
-  var uploadField = document.querySelector('.img-upload');
-  var hashtagsInput = uploadField.querySelector('.text__hashtags');
+  var hashtagsInput = window.utils.uploadField.querySelector('.text__hashtags');
 
   // определяет наличие повторяющихся хэш-тегов вне зависимости от регистра
   var detectDuplicateHashtag = function (tag, index, hashes) {
@@ -22,9 +22,11 @@
 
   // проверяет на валидность введенные хэш-теги
   var validateHashtags = function (evt) {
-    var hashes = evt.target.value.split(' ').filter(function (tag) {
-      return tag;
-    });
+    var hashes = evt.target.value
+      .split(' ')
+      .filter(function (tag) {
+        return tag;
+      });
 
     var errorMessage = '';
 
@@ -38,8 +40,7 @@
       } else if (hashes.length > HASHTAGS_MAX_COUNT) {
         errorMessage = 'Нельзя указать больше пяти хэш-тегов';
       } else if (tag.length > HASHTAG_MAX_LENGTH) {
-        errorMessage =
-          'Максимальная длина одного хэш-тега 20 символов, включая символ "#"';
+        errorMessage = 'Максимальная длина одного хэш-тега 20 символов, включая символ "#"';
       }
     });
 
@@ -53,4 +54,5 @@
 
   // событие изменения значения инпута для хэш-тегов
   hashtagsInput.addEventListener('change', onHashtagsInputChange);
+
 })();
