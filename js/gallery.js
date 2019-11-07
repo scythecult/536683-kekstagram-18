@@ -2,38 +2,8 @@
 
 (function () {
 
-  var MIN_LIKES_COUNT = 15;
-  var MAX_LIKES_COUNT = 200;
-  var PHOTOS_COUNT = 25;
-
   var photoSample = document.querySelector('#picture').content.querySelector('.picture');
   var photosList = document.querySelector('.pictures');
-
-
-  // генерирует объект-фотографию
-  var generatePhoto = function (photoNumber) {
-    var photo = {};
-
-    var descriptionIndex = window.utils.generateRandomNumber(0, window.data.photoDescription.length - 1);
-
-    photo.url = 'photos/' + photoNumber + '.jpg';
-    photo.description = window.data.photoDescription[descriptionIndex];
-    photo.likes = window.utils.generateRandomNumber(MIN_LIKES_COUNT, MAX_LIKES_COUNT);
-    photo.comments = window.comments.generateComments();
-
-    return photo;
-  };
-
-  // генерирует массив объектов-фотографий
-  var generatePhotos = function (photosCount) {
-    var photos = [];
-
-    for (var i = 0; i < photosCount; i++) {
-      photos[i] = generatePhoto(i + 1);
-    }
-
-    return photos;
-  };
 
   // обработчик события click по миниатюре фото
   var onPhotoClick = function (photo) {
@@ -77,6 +47,14 @@
     photosList.appendChild(fragment);
   };
 
-  renderPhotosList(generatePhotos(PHOTOS_COUNT));
+  var onLoad = function (photos) {
+    renderPhotosList(photos);
+  };
+
+  var onError = function () {
+    window.openErrorMessage();
+  };
+
+  window.backend.load(onLoad, onError);
 
 })();
