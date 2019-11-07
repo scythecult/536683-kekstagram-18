@@ -6,6 +6,7 @@
   var SEPIA_COEFFICIENT = 0.01;
   var PHOBOS_COEFFICIENT = 0.03;
   var HEAT_COEFFICIENT = 0.02;
+  var CORRECTION = 1;
 
   var userUploadImg = window.utils.uploadField.querySelector('.img-upload__preview img');
   var effectSlider = window.utils.uploadField.querySelector('.effect-level');
@@ -38,7 +39,7 @@
   };
 
   // меняет эффект на фото в зависимости от положения пина
-  var changeEffectsPin = function () {
+  window.changeEffectsPin = function () {
 
     switch (effects.querySelector('input:checked').value) {
       case 'chrome':
@@ -54,19 +55,9 @@
         userUploadImg.style.filter = 'blur(' + (effectValueInput.value * PHOBOS_COEFFICIENT) + 'px)';
         break;
       case 'heat':
-        userUploadImg.style.filter = 'brightness(' + (effectValueInput.value * HEAT_COEFFICIENT + 1) + ')';
+        userUploadImg.style.filter = 'brightness(' + (effectValueInput.value * HEAT_COEFFICIENT + CORRECTION) + ')';
         break;
     }
-  };
-
-  // вычисление уровня насыщенности эффекта
-  var onPinMouseMove = function () {
-    changeEffectsPin();
-  };
-
-  var onPinMouseUp = function () {
-    document.removeEventListener('mousemove', onPinMouseMove);
-    document.removeEventListener('mouseup', onPinMouseUp);
   };
 
   // смена эффекта по клику
@@ -76,13 +67,9 @@
     changeEffectsButton();
   };
 
-  // изменение уровня насыщенности эффекта при
-  document.addEventListener('mousemove', onPinMouseMove);
-
-  //
-  document.addEventListener('mousemup', onPinMouseUp);
-
-  // изменение эффекта фото при клике
-  effects.addEventListener('click', onEffectsItemClick);
+  // добавление обработчиков клика на радио-кнопки смены эффекта
+  effects.querySelectorAll('.effects__item').forEach(function (button) {
+    button.addEventListener('click', onEffectsItemClick);
+  });
 
 })();

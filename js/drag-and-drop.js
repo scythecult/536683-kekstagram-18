@@ -7,7 +7,7 @@
   var effectValueInput = window.utils.uploadField.querySelector('.effect-level__value');
   var effectDepth = window.utils.uploadField.querySelector('.effect-level__depth');
 
-  var onMouseDown = function (downEvt) {
+  var onMouseDown = function (downEvt, action) {
     downEvt.preventDefault();
 
     var startCoords = {
@@ -36,6 +36,8 @@
       effectValueInput.value = Math.round((pin.offsetLeft * window.utils.maxEffectValue) / effectScale.offsetWidth);
 
       effectDepth.style.width = effectValueInput.value + '%';
+
+      action();
     };
 
     var onMouseUp = function (upEvt) {
@@ -49,6 +51,8 @@
     document.addEventListener('mouseup', onMouseUp);
   };
 
-  pin.addEventListener('mousedown', onMouseDown);
+  pin.addEventListener('mousedown', function (downEvt) {
+    onMouseDown(downEvt, window.changeEffectsPin);
+  });
 
 })();
