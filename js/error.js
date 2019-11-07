@@ -17,6 +17,8 @@
     });
 
     errorBlock.addEventListener('click', onErrorBlockClick);
+
+    document.addEventListener('keydown', onErrorBlockEscPress);
   };
 
   var closeErrorMessage = function () {
@@ -41,7 +43,5 @@
   var onErrorBlockEscPress = function (evt) {
     window.utils.isEscPress(evt, closeErrorMessage);
   };
-
-  document.addEventListener('keydown', onErrorBlockEscPress);
 
 })();

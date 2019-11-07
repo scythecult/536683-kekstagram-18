@@ -8,6 +8,8 @@
   var hashtagsInput = window.utils.uploadField.querySelector('.text__hashtags');
   var commentUploadInput = window.utils.uploadField.querySelector('.text__description');
 
+  var form = window.utils.uploadField.querySelector('.img-upload__form');
+
   // открывает окно редактирования загруженного фото
   var openUploadField = function () {
     window.utils.uploadField.querySelector('.img-upload__overlay').classList.remove('hidden');
@@ -29,7 +31,7 @@
 
     document.removeEventListener('keydown', onUploadFieldEscPress);
 
-    imgUploadInput.value = '';
+    window.utils.resetForm();
 
     window.utils.resetUserImgSettings();
   };
@@ -64,6 +66,27 @@
     window.utils.isEnterPress(evt, closeUploadField);
   };
 
+  //
+  var onLoad = function () {
+    closeUploadField();
+    window.openSuccessMessage();
+  };
+
+  //
+  var onError = function () {
+    closeUploadField();
+    window.openErrorMessage();
+  };
+
+  // обработчик отправки формы
+  var onSubmit = function (evt) {
+    window.backend.save(new FormData(form), onLoad, onError);
+
+    evt.preventDefault();
+  };
+
+  // подписка на событие отправки формы
+  form.addEventListener('submit', onSubmit);
 
   // открытие окна редактирования фото при изменении значения инпута загрузки
   imgUploadInput.addEventListener('change', onInputUploadChange);
