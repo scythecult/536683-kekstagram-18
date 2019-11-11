@@ -37,7 +37,7 @@
   };
 
   // отрисовывает фотографии в блок .picture
-  var renderPhotosList = function (photos) {
+  window.renderPhotosList = function (photos) {
     var fragment = document.createDocumentFragment();
 
     photos.forEach(function (photo) {
@@ -47,14 +47,6 @@
     photosList.appendChild(fragment);
   };
 
-  var onLoad = function (photos) {
-    renderPhotosList(photos);
-  };
-
-  var onError = function () {
-    window.openErrorMessage();
-  };
-
-  window.backend.load(onLoad, onError);
+  window.backend.load(window.renderPhotosList, window.openErrorMessage);
 
 })();

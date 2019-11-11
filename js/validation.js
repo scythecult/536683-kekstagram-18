@@ -28,6 +28,8 @@
         return tag;
       });
 
+    evt.target.removeAttribute('style');
+
     var errorMessage = '';
 
     hashes.forEach(function (tag, index) {
@@ -41,6 +43,10 @@
         errorMessage = 'Нельзя указать больше пяти хэш-тегов';
       } else if (tag.length > HASHTAG_MAX_LENGTH) {
         errorMessage = 'Максимальная длина одного хэш-тега 20 символов, включая символ "#"';
+      }
+
+      if (errorMessage !== '') {
+        evt.target.style = 'outline: 2px solid red';
       }
     });
 
