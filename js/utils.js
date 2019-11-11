@@ -41,6 +41,19 @@
     return randomNumber;
   };
 
+  // перемешивает массив с фотографиями
+  var shufflePhotos = function (photos) {
+    var index = 0;
+    for (var i = photos.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      index = photos[i];
+      photos[i] = photos[j];
+      photos[j] = index;
+    }
+
+    return photos;
+  };
+
   // сбрасывает все настройки изображения
   var resetUserImgSettings = function () {
     effectSlider.classList.add('hidden');
@@ -66,6 +79,7 @@
     isEscPress: isEscPress,
     isEnterPress: isEnterPress,
     generateRandomNumber: generateRandomNumber,
+    shufflePhotos: shufflePhotos,
     resetUserImgSettings: resetUserImgSettings,
     resetForm: resetForm,
     uploadField: uploadField,

@@ -4,6 +4,7 @@
 
   var photoSample = document.querySelector('#picture').content.querySelector('.picture');
   var photosList = document.querySelector('.pictures');
+  var imgFilters = document.querySelector('.img-filters');
 
   // обработчик события click по миниатюре фото
   var onPhotoClick = function (photo) {
@@ -45,8 +46,11 @@
     });
 
     photosList.appendChild(fragment);
+
+    imgFilters.classList.remove('img-filters--inactive');
   };
 
   window.backend.load(window.renderPhotosList, window.openErrorMessage);
+
 
 })();

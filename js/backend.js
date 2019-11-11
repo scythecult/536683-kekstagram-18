@@ -2,6 +2,8 @@
 
 (function () {
 
+  var TIMEOUT = 10000;
+
   var URL_GET = 'https://js.dump.academy/kekstagram/data';
   var URL_POST = 'https://js.dump.academy/kekstagram';
 
@@ -17,6 +19,16 @@
         onError();
       }
     });
+
+    xhr.addEventListener('error', function () {
+      onError('Произошла ошибка соединения');
+    });
+
+    xhr.addEventListener('timeout', function () {
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
+
+    xhr.timeout = TIMEOUT;
 
     xhr.open(method, url);
 

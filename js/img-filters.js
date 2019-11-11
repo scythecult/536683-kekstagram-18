@@ -4,13 +4,9 @@
 
   var RANDOM_IMG_COUNT = 10;
 
-  var imgFilters = document.querySelector('.img-filters');
-  var filterButtons = imgFilters.querySelectorAll('.img-filters__button');
-
+  var filterButtons = document.querySelectorAll('.img-filters__button');
   var photosList = document.querySelector('.pictures');
 
-  // показывает фильтры
-  imgFilters.classList.remove('img-filters--inactive');
 
   // удалаяет класс активной кнопки
   var removeActiveClass = function () {
@@ -32,17 +28,7 @@
 
   // получает массив случайных и уникальных фото в определенном количестве из родительского массива фото
   var getUniquePhotos = function (photos, count) {
-    var notUniquePhotos = [];
-    var uniquePhotos = [];
-
-    for (var i = 0; uniquePhotos.length < count; i++) {
-      notUniquePhotos[i] = photos[window.utils.generateRandomNumber(0, photos.length - 1)];
-      uniquePhotos = notUniquePhotos.filter(function (it, j) {
-        return notUniquePhotos.indexOf(it) === j;
-      });
-    }
-
-    return uniquePhotos;
+    return window.utils.shufflePhotos(photos.slice()).slice(0, count);
   };
 
   // фильтр "по популярности"
