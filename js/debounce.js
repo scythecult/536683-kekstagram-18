@@ -4,16 +4,21 @@
 
   var TIMEOUT_INTERVAL = 500;
 
-  var lastTimeout = null;
-
   window.debounce = function (action) {
 
-    if (lastTimeout) {
-      clearTimeout(lastTimeout);
-    }
+    var lastTimeout = null;
 
-    lastTimeout = setTimeout(action, TIMEOUT_INTERVAL);
+    return function () {
+      var parameters = arguments;
 
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
+      }
+
+      lastTimeout = setTimeout(function () {
+        action.apply(null, parameters);
+      }, TIMEOUT_INTERVAL);
+    };
   };
 
 })();
