@@ -14,6 +14,8 @@
   var openUploadField = function () {
     window.utils.uploadField.querySelector('.img-upload__overlay').classList.remove('hidden');
 
+    // window.renderUserPhoto();
+
     document.addEventListener('keydown', onUploadFieldEscPress);
 
     hashtagsInput.addEventListener('focus', onInputFocus);
@@ -23,6 +25,7 @@
     commentUploadInput.addEventListener('blur', onInputBlur);
 
     window.utils.resetUserImgSettings();
+    window.renderUserPhoto();
   };
 
   // закрывает окно редактирования загруженного фото
