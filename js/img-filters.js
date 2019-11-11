@@ -75,11 +75,11 @@
   };
 
   // обработчик клика по кнопке фильтра
-  var onFilterButtonClick = function (evt) {
+  var onFilterButtonClick = window.debounce(function (evt) {
     removeActiveClass();
     evt.target.classList.add('img-filters__button--active');
-    window.debounce(filterButtonMap[evt.target.id]);
-  };
+    filterButtonMap[evt.target.id]();
+  });
 
   // подписка на событие клика по кнопке фильтра
   filterButtons.forEach(function (button) {
