@@ -66,10 +66,13 @@
     effectDepth.style.width = MAX_EFFECT_VALUE + '%';
   };
 
-  //
+  // приводит инпуты в форме редактирования изображения в первоначальное состояние
   var resetForm = function () {
     imgUploadInput.value = '';
     hashtagsInput.value = '';
+    hashtagsInput.removeAttribute('style');
+    hashtagsInput.setCustomValidity('');
+
     commentUploadInput.value = '';
 
     effectOriginalInput.checked = true;

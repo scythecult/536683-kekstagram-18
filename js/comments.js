@@ -40,45 +40,30 @@
   };
 
   // генерирует и отрисовывает список комментариев
-  var renderCommentsList = function (photo) {
+  var renderList = function (photo) {
     commentsCopy = photo.comments.slice();
     count = photo.comments.length;
 
-    if (commentsCopy.length > COMMENTS_LIMIT) {
-      commentsCount.classList.remove('visually-hidden');
-      commentsLoader.classList.remove('visually-hidden');
+    var commentsInRange = commentsCopy.length < COMMENTS_LIMIT;
+    var commentsToRender = commentsInRange ? commentsCopy : commentsCopy.splice(0, COMMENTS_LIMIT);
 
-      renderComments(commentsCopy.splice(0, 5));
-    } else {
-      commentsCount.classList.add('visually-hidden');
-      commentsLoader.classList.add('visually-hidden');
+    commentsLoader.classList.toggle('visually-hidden', commentsInRange);
 
-      renderComments(commentsCopy);
-    }
+    renderComments(commentsToRender);
   };
 
-  //
-  var onCommentsLoaderClick = function () {
-    renderComments(commentsCopy.splice(0, 5));
+  // обработчик клика по кнопке загрузки дополнительных комментариев
+  var onLoaderClick = function () {
+    renderComments(commentsCopy.splice(0, COMMENTS_LIMIT));
 
-    if (commentsCopy.length === 0) {
+    if (!commentsCopy.length) {
       commentsLoader.classList.add('visually-hidden');
     }
-  };
-
-  // удаляет комментарии
-  var removeComments = function () {
-    var commentsPlugs = commentsContainer.querySelectorAll('.social__comment');
-
-    commentsPlugs.forEach(function (commentPlug) {
-      commentsContainer.removeChild(commentPlug);
-    });
   };
 
   window.comments = {
-    onCommentsLoaderClick: onCommentsLoaderClick,
-    renderCommentsList: renderCommentsList,
-    removeComments: removeComments
+    onLoaderClick: onLoaderClick,
+    renderList: renderList
   };
 
 })();
