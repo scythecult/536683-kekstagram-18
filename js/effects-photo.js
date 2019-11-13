@@ -15,27 +15,13 @@
 
   // меняет эффект на фото при нажатии на кнопку эффекта
   var changeEffectsButton = function () {
-    if (effects.querySelector('input:checked').value !== 'none') {
+    var filterValue = effects.querySelector('input:checked').value;
+
+    if (filterValue !== 'none') {
       effectSlider.classList.remove('hidden');
     }
 
-    switch (effects.querySelector('input:checked').value) {
-      case 'chrome':
-        userUploadImg.classList.add('effects__preview--chrome');
-        break;
-      case 'sepia':
-        userUploadImg.classList.add('effects__preview--sepia');
-        break;
-      case 'marvin':
-        userUploadImg.classList.add('effects__preview--marvin');
-        break;
-      case 'phobos':
-        userUploadImg.classList.add('effects__preview--phobos');
-        break;
-      case 'heat':
-        userUploadImg.classList.add('effects__preview--heat');
-        break;
-    }
+    userUploadImg.classList.add('effects__preview--' + filterValue);
   };
 
   // меняет эффект на фото в зависимости от положения пина

@@ -5,6 +5,7 @@
   var bigPhoto = document.querySelector('.big-picture');
   var buttonCloseBigPhoto = bigPhoto.querySelector('.big-picture__cancel');
   var commentsLoader = bigPhoto.querySelector('.comments-loader');
+  var commentsContainer = bigPhoto.querySelector('.social__comments');
 
   // отрисовывает блок с большой фотографией
   window.renderBigPhoto = function (photo) {
@@ -16,11 +17,11 @@
     bigPhoto.querySelector('.comments-count').textContent = photo.comments.length;
     bigPhoto.querySelector('.social__caption').textContent = photo.description;
 
-    window.comments.removeComments();
+    commentsContainer.innerHTML = '';
 
-    window.comments.renderCommentsList(photo);
+    window.comments.renderList(photo);
 
-    commentsLoader.addEventListener('click', window.comments.onCommentsLoaderClick);
+    commentsLoader.addEventListener('click', window.comments.onLoaderClick);
 
     document.addEventListener('keydown', onBigPhotoEscPress);
   };
@@ -29,7 +30,7 @@
   var closeBigPhoto = function () {
     bigPhoto.classList.add('hidden');
     document.removeEventListener('keydown', onBigPhotoEscPress);
-    commentsLoader.removeEventListener('click', window.comments.onCommentsLoaderClick);
+    commentsLoader.removeEventListener('click', window.comments.onLoaderClick);
   };
 
   //  обработчик закрытия фото при нажатии на ESC

@@ -45,7 +45,7 @@
         errorMessage = 'Максимальная длина одного хэш-тега 20 символов, включая символ "#"';
       }
 
-      if (errorMessage !== '') {
+      if (errorMessage) {
         evt.target.style = 'outline: 2px solid red';
       }
     });
